@@ -6,18 +6,30 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Video</title>
         <style>
-            .content {
+            /* .content {
                 position: absolute;
                 left: 50%;
                 top: 40%;
                 -webkit-transform: translate(-50%, -50%);
                 transform: translate(-50%, -50%);
+            } */
+            .zoom {
+                padding: 50px;
+                transition: transform 0.2s; /* Animation */
+                width: 200px;
+                height: 200px;
+                margin: 0 auto;
+            }
+            .zoom:hover {
+                transform: scale(
+                    1.5
+                ); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
             }
         </style>
     </head>
     <body>
-        <div class="content">
-            <video width="640" height="480" poster="windows-11.jpg" controls>
+        <div class="zoom">
+            <video width="500" height="300" poster="windows-11.jpg" controls>
                 <source
                     src="https://storage.googleapis.com/cricgif-bucket-testing1/Singer%20-%2035867.mp4"
                     type="video/mp4"
