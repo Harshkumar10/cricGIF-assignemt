@@ -6,17 +6,33 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Video</title>
         <style>
+            img {
+                width: 200px;
+                height: 200px;
+            }
             .zoom {
                 padding: 50px;
                 transition: transform 0.2s; /* Animation */
                 width: 200px;
                 height: 200px;
-                margin: 0 auto;
+                /* margin: 0 auto; */
             }
             .zoom:hover {
                 transform: scale(
                     1.5
                 ); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+            }
+            button {
+                margin-top: 350px;
+                margin-left: 350px;
+                background-color: #4caf50; /* Green */
+                border: none;
+                color: white;
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
             }
         </style>
     </head>
@@ -37,7 +53,7 @@
                 />
             </video>
         </div>
-        <div id="gif" style="display: none">
+        <div class="zoom" id="gif" style="display: none">
             <img src="" alt="" />
         </div>
         <button onclick="makegif()">Switch</button>
@@ -46,35 +62,40 @@
     <script>
         function makegif() {
             console.log("gif func");
-            gifshot.createGIF(
-                {
-                    gifWidth: 200,
-                    gifHeight: 200,
-                    video: ["in.mp4"],
-                    interval: 0.1,
-                    numFrames: 10,
-                    frameDuration: 1,
-                    fontWeight: "normal",
-                    fontSize: "16px",
-                    fontFamily: "sans-serif",
-                    fontColor: "#ffffff",
-                    textAlign: "center",
-                    textBaseline: "bottom",
-                    sampleInterval: 10,
-                    numWorkers: 2,
-                },
-                function (obj) {
-                    if (!obj.error) {
-                        var image = obj.image,
-                            animatedImage =
-                                document.getElementsByTagName("img")[0];
-                        animatedImage.src = image;
-                        // document.body.appendChild(animatedImage);
+            if (document.getElementById("gif").style.display === "none") {
+                gifshot.createGIF(
+                    {
+                        gifWidth: 200,
+                        gifHeight: 200,
+                        video: ["in.mp4"],
+                        interval: 0.1,
+                        numFrames: 10,
+                        frameDuration: 1,
+                        fontWeight: "normal",
+                        fontSize: "16px",
+                        fontFamily: "sans-serif",
+                        fontColor: "#ffffff",
+                        textAlign: "center",
+                        textBaseline: "bottom",
+                        sampleInterval: 10,
+                        numWorkers: 2,
+                    },
+                    function (obj) {
+                        if (!obj.error) {
+                            var image = obj.image,
+                                animatedImage =
+                                    document.getElementsByTagName("img")[0];
+                            animatedImage.src = image;
+                            // document.body.appendChild(animatedImage);
+                        }
                     }
-                }
-            );
-            document.getElementById("video").style.display = "none";
-            document.getElementById("gif").style.display = "block";
+                );
+                document.getElementById("video").style.display = "none";
+                document.getElementById("gif").style.display = "block";
+            } else {
+                document.getElementById("video").style.display = "block";
+                document.getElementById("gif").style.display = "none";
+            }
         }
 
         function playVideo() {
