@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Video</title>
+        <style>
+            .content {
+                position: absolute;
+                left: 50%;
+                top: 40%;
+                -webkit-transform: translate(-50%, -50%);
+                transform: translate(-50%, -50%);
+            }
+        </style>
+    </head>
+    <body>
+        <div class="content">
+            <video width="640" height="480" poster="windows-11.jpg" controls>
+                <source
+                    src="https://storage.googleapis.com/cricgif-bucket-testing1/Singer%20-%2035867.mp4"
+                    type="video/mp4"
+                />
+            </video>
+        </div>
+    </body>
+    <script src="gifshot.min.js"></script>
+    <script>
+        console.log("jdfa");
+        function makegif() {
+            gifshot.createGIF(
+                {
+                    gifWidth: 200,
+                    gifHeight: 200,
+                    video: ["in.mp4"],
+                    interval: 0.1,
+                    numFrames: 10,
+                    frameDuration: 1,
+                    fontWeight: "normal",
+                    fontSize: "16px",
+                    fontFamily: "sans-serif",
+                    fontColor: "#ffffff",
+                    textAlign: "center",
+                    textBaseline: "bottom",
+                    sampleInterval: 10,
+                    numWorkers: 2,
+                },
+                function (obj) {
+                    if (!obj.error) {
+                        var image = obj.image,
+                            animatedImage = document.createElement("img");
+                        animatedImage.src = image;
+                        document.body.appendChild(animatedImage);
+                    }
+                }
+            );
+        }
+        makegif();
+    </script>
+</html>
