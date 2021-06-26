@@ -6,13 +6,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Video</title>
         <style>
-            /* .content {
-                position: absolute;
-                left: 50%;
-                top: 40%;
-                -webkit-transform: translate(-50%, -50%);
-                transform: translate(-50%, -50%);
-            } */
             .zoom {
                 padding: 50px;
                 transition: transform 0.2s; /* Animation */
@@ -28,19 +21,31 @@
         </style>
     </head>
     <body>
-        <div class="zoom">
-            <video width="500" height="300" poster="windows-11.jpg" controls>
+        <div class="zoom" id="video">
+            <video
+                width="500"
+                height="300"
+                poster="windows-11.jpg"
+                controls
+                onmouseenter="playVideo()"
+                onmouseleave="pauseVideo()"
+                muted="muted"
+            >
                 <source
                     src="https://storage.googleapis.com/cricgif-bucket-testing1/Singer%20-%2035867.mp4"
                     type="video/mp4"
                 />
             </video>
         </div>
+        <div id="gif" style="display: none">
+            <img src="" alt="" />
+        </div>
+        <button onclick="makegif()">Switch</button>
     </body>
     <script src="gifshot.min.js"></script>
     <script>
-        console.log("jdfa");
         function makegif() {
+            console.log("gif func");
             gifshot.createGIF(
                 {
                     gifWidth: 200,
@@ -61,13 +66,25 @@
                 function (obj) {
                     if (!obj.error) {
                         var image = obj.image,
-                            animatedImage = document.createElement("img");
+                            animatedImage =
+                                document.getElementsByTagName("img")[0];
                         animatedImage.src = image;
-                        document.body.appendChild(animatedImage);
+                        // document.body.appendChild(animatedImage);
                     }
                 }
             );
+            document.getElementById("video").style.display = "none";
+            document.getElementById("gif").style.display = "block";
         }
-        makegif();
+
+        function playVideo() {
+            var vid = document.getElementsByTagName("video")[0];
+            vid.play();
+        }
+
+        function pauseVideo() {
+            var vid = document.getElementsByTagName("video")[0];
+            vid.pause();
+        }
     </script>
 </html>
